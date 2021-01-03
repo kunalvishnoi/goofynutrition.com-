@@ -132,7 +132,7 @@
 
 const data = { key: token };
 
-fetch('https://keys-generator.herokuapp.com/api/productA/verify', {
+fetch('https://keys-generator.herokuapp.com/api/productB/verify', {
   method: 'POST', // or 'PUT'
   headers: {
     'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ fetch('https://keys-generator.herokuapp.com/api/productA/verify', {
 .then(response => response.json())
 .then(data => {
   if(data.success) {
-    document.getElementById("message").innerHTML = "This Product is Genuine. Thanks for being a valuable customer of Advance Muscle Pump Nutition"
+    document.getElementById("message").innerHTML = "This Product is Genuine. Thanks for being a valuable customer of Goofy Nutition"
   }
   else {
     document.getElementById("message").innerHTML = "This Product is Not Genuine."
