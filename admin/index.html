@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Goofy Nutrition</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,500,600,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+
+ 
+
+  <!-- Main Stylesheet File -->
+  <link href="../css/style.css" rel="stylesheet">
+
+ 
+</head>
+
+<body>
+    <div class="verify">
+            <h1 class="text-center text-white">Admin Form</h1>
+            <div class="container d-flex justify-content-center">
+                    <div class="row w-100">
+                       
+        <div class="content-new w-100">
+            <div class="main-form">
+                
+                        
+                <form onsubmit="event.preventDefault(); myFunction();">
+                    <div class="col-md-12 text-center my-2">
+                    <input type="text" class="form-control" id="name" placeholder="Username"/>
+                </div>
+                <div class="col-md-12 text-center my-2">
+                        <input type="password" class="form-control" id="password" placeholder="Password"/>
+                    </div>
+                    <div class="col-md-12 text-center my-2">
+                            <input type="number" class="form-control" id="count" placeholder="Count of Tokens"/>
+                        </div>
+                        <div class="col-md-12 text-center my-2">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                        
+                </form>
+                <p>* Try not to generate more than 1000 tokens</p>
+            
+            </div>
+        </div>
+    </div>
+</div>  
+
+    </div>
+    <script type="text/javascript">
+    function myFunction() {
+ 
+  var username = document.getElementById('name').value;
+  var password = document.getElementById('password').value;
+  var count = document.getElementById('count').value;
+
+  var data0 = {email: `${username}`, password : `${password}` , limit: `${count}`};
+  
+
+  (async () => {
+    const rawResponse =  fetch('https://keys-generator.herokuapp.com/api/productC/generate', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data0)
+    });
+    const content = await rawResponse;
+    if(content.status===200){
+      console.log(content);
+      const url = window.URL.createObjectURL(await content.blob());
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      // the filename you want
+      a.download = 'token.xls';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      alert('your file has downloaded!');
+    }
+    else{
+      alert('Unauthorized')
+    }
+       
+  })();
+
+
+}
+  </script>
+    </body>
+    </html>
